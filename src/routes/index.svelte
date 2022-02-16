@@ -1,7 +1,7 @@
 <script>
-	import Footer from '../components/Footer.svelte';
+	// import Footer from '../components/Footer.svelte';
 	import Header from '../components/Header.svelte';
-	import MainContent from '../components/MainContent.svelte';
+	// import MainContent from '../components/MainContent.svelte';
 </script>
 
 <svelte:head>
@@ -34,8 +34,8 @@
 	<meta property="twitter:image" content="" />
 </svelte:head>
 
-<div>
+<div class="font-poppins">
 	<Header />
-	<MainContent />
-	<Footer />
+	<!-- <MainContent /> -->
+	<!-- <Footer /> -->
 </div>
