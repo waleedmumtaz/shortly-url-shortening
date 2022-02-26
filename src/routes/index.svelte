@@ -1,12 +1,12 @@
 <script>
 	// import Footer from '../components/Footer.svelte';
 	import Header from '../components/Header.svelte';
-	// import MainContent from '../components/MainContent.svelte';
+	import MainContent from '../components/MainContent.svelte';
 </script>
 
 <svelte:head>
 	<!-- Primary Meta Tags -->
-	<title>Shortly | URL Shortening</title>
+	<title>Shortly | URL Shortening Service</title>
 	<meta name="title" content="Shortly | URL Shortening" />
 	<meta
 		name="description"
@@ -36,6 +36,6 @@
 
 <div class="font-poppins">
 	<Header />
-	<!-- <MainContent /> -->
+	<MainContent />
 	<!-- <Footer /> -->
 </div>
