@@ -1,3 +1,46 @@
+<script>
+	import { slide } from 'svelte/transition';
+
+	const baseUrl = 'https://api.shrtco.de/v2/shorten?url=';
+	let url = '';
+	let copiedToClipboard = false;
+
+	let generatedUrls = [];
+
+	const fetchData = async (url) => {
+		if (url.length > 0) {
+			try {
+				const response = await fetch(`${baseUrl}${url}`);
+				const data = await response.json();
+				generatedUrls = [
+					...generatedUrls,
+					{
+						url: url,
+						shortCode: data.result.short_link
+					}
+				];
+			} catch (error) {
+				console.log(error);
+			}
+		} else {
+			return console.log('Please enter a valid URL');
+		}
+	};
+
+	const copyShortCode = async (shortCode) => {
+		try {
+			await navigator.clipboard.writeText(shortCode);
+			copiedToClipboard = true;
+
+			setTimeout(() => {
+				copiedToClipboard = false;
+			}, 2000);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+</script>
+
 <main>
 	<div class="mt-16">
 		<div class="">
@@ -10,7 +53,7 @@
 			</p>
 			<button class="rounded-full bg-cstm-primary-cyan py-3 px-8 text-white">Get Started</button>
 		</div>
-		<div class="relative mx-6 mb-20">
+		<div class="relative mx-6">
 			<img
 				src="/bg-shorten-mobile.svg"
 				alt="pattern"
@@ -19,12 +62,46 @@
 			<div class="absolute inset-0 flex flex-col items-center justify-center gap-6 p-6">
 				<input
 					type="text"
+					bind:value={url}
 					placeholder="Shorten a link here..."
-					class="tex w-full flex-1 rounded-md bg-transparent bg-white px-3"
+					class="tex w-full flex-1 rounded-md bg-transparent bg-white px-3 focus:outline-none"
 				/>
-				<button class="w-full flex-1 rounded-md bg-cstm-primary-cyan font-bold text-white"
+				<button
+					on:click|preventDefault={() => {
+						fetchData(url);
+					}}
+					class="w-full flex-1 rounded-md bg-cstm-primary-cyan font-bold text-white"
 					>Shorten It!</button
 				>
+			</div>
+		</div>
+
+		<!-- Short Codes -->
+		<div class="bg-gray-100 px-6 py-5">
+			<div class="space-y-5">
+				{#if generatedUrls.length > 0}
+					{#each generatedUrls as generatedUrl}
+						<div transition:slide class="rounded-md bg-white shadow-md">
+							<p class="p-4">{generatedUrl.url}</p>
+							<hr />
+							<div class="space-y-2 p-4">
+								<a
+									rel="external"
+									href={`//${generatedUrl.shortCode}`}
+									class="text-cstm-primary-cyan">{generatedUrl.shortCode}</a
+								>
+								<button
+									on:click={() => {
+										copyShortCode(generatedUrl.shortCode);
+									}}
+									class={`w-full rounded-md py-2 font-bold text-white transition-all ${
+										copiedToClipboard ? 'bg-cstm-primary-dark-violet' : 'bg-cstm-primary-cyan'
+									}`}>{copiedToClipboard ? 'Copied!' : 'Copy'}</button
+								>
+							</div>
+						</div>
+					{/each}
+				{/if}
 			</div>
 		</div>
 

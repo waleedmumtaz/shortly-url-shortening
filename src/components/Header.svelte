@@ -11,7 +11,7 @@
 
 <header>
 	<!-- mobile nav -->
-	<div class="relative px-6 pt-8">
+	<div class="relative px-6 pt-8 md:hidden">
 		<nav>
 			<div class="flex items-center justify-between">
 				<Logo />
@@ -43,5 +43,23 @@
 				</ul>
 			{/if}
 		</nav>
+	</div>
+
+	<!-- tablet and desktop nav -->
+	<div class="container mx-auto mt-10 hidden px-20 md:block">
+		<div class="flex items-center justify-between">
+			<div class="flex items-center gap-14">
+				<Logo />
+				<div class="flex items-center gap-10 text-cstm-neutral-grayish-violet">
+					<a href="/#">Features</a>
+					<a href="/#">Pricing</a>
+					<a href="/#">Resources</a>
+				</div>
+			</div>
+			<div class="flex items-center gap-10 text-cstm-neutral-grayish-violet">
+				<a href="/#">Login</a>
+				<a href="/#" class="rounded-full bg-cstm-primary-cyan px-8 py-3 text-white">Sign Up</a>
+			</div>
+		</div>
 	</div>
 </header>
