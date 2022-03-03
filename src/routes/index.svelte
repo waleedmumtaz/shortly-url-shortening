@@ -1,5 +1,5 @@
 <script>
-	// import Footer from '../components/Footer.svelte';
+	import Footer from '../components/Footer.svelte';
 	import Header from '../components/Header.svelte';
 	import MainContent from '../components/MainContent.svelte';
 </script>
@@ -37,5 +37,5 @@
 <div class="font-poppins">
 	<Header />
 	<MainContent />
-	<!-- <Footer /> -->
+	<Footer />
 </div>

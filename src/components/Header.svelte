@@ -1,5 +1,6 @@
 <script>
 	import { slide } from 'svelte/transition';
+	import Logo from '../components/Logo.svelte';
 
 	let isNavOpen = false;
 
@@ -13,7 +14,7 @@
 	<div class="relative px-6 pt-8">
 		<nav>
 			<div class="flex items-center justify-between">
-				<img src="/logo.svg" alt="logo" />
+				<Logo />
 				<button on:click|preventDefault={toggleNav}>
 					<div class="flex flex-col items-center justify-center gap-1">
 						{#each Array(3) as _}
