@@ -42,35 +42,51 @@
 </script>
 
 <main>
-	<div class="mt-16">
-		<div class="">
-			<img src="/illustration-working.svg" alt="person working on computer" class="w-full" />
+	<div class="mt-16 md:container md:mx-auto md:px-20">
+		<!-- hero -->
+		<div class="md:grid md:grid-cols-2">
+			<div class="md:order-last">
+				<img src="/illustration-working.svg" alt="person working on computer" class="w-full" />
+			</div>
+			<div class="mt-10 mb-20 px-6 text-center md:px-0 md:text-left">
+				<h1 class="mb-5 text-4xl font-bold md:mb-2 md:text-6xl">More than just shorter links</h1>
+				<p class="mb-5 text-cstm-neutral-grayish-violet md:mb-10 md:max-w-md">
+					Build your brand’s recognition and get detailed insights on how your links are performing.
+				</p>
+				<button class="rounded-full bg-cstm-primary-cyan py-3 px-8 text-white">Get Started</button>
+			</div>
 		</div>
-		<div class="mt-10 mb-20 px-6 text-center">
-			<h1 class="mb-5 text-4xl font-bold">More than just shorter links</h1>
-			<p class="mb-5 text-cstm-neutral-grayish-violet">
-				Build your brand’s recognition and get detailed insights on how your links are performing.
-			</p>
-			<button class="rounded-full bg-cstm-primary-cyan py-3 px-8 text-white">Get Started</button>
-		</div>
-		<div class="relative mx-6">
-			<img
-				src="/bg-shorten-mobile.svg"
-				alt="pattern"
-				class="w-full rounded-lg bg-cstm-primary-dark-violet"
-			/>
-			<div class="absolute inset-0 flex flex-col items-center justify-center gap-6 p-6">
+
+		<!-- input -->
+		<div class="relative mx-6 md:mx-0 md:mt-10">
+			<div class="md:hidden">
+				<img
+					src="/bg-shorten-mobile.svg"
+					alt="pattern"
+					class="w-full rounded-lg bg-cstm-primary-dark-violet"
+				/>
+			</div>
+			<div class="hidden md:block">
+				<img
+					src="/bg-shorten-desktop.svg"
+					alt="pattern"
+					class="w-full rounded-lg bg-cstm-primary-dark-violet"
+				/>
+			</div>
+			<div
+				class="absolute inset-0 flex flex-col items-center justify-center gap-6 p-6 md:flex-row md:px-14"
+			>
 				<input
 					type="text"
 					bind:value={url}
 					placeholder="Shorten a link here..."
-					class="tex w-full flex-1 rounded-md bg-transparent bg-white px-3 focus:outline-none"
+					class="w-full rounded-md bg-transparent bg-white px-3 py-3 focus:outline-none md:flex-1 md:py-4 md:px-8"
 				/>
 				<button
 					on:click|preventDefault={() => {
 						fetchData(url);
 					}}
-					class="w-full flex-1 rounded-md bg-cstm-primary-cyan font-bold text-white"
+					class="w-full rounded-md bg-cstm-primary-cyan py-3 font-bold text-white md:w-44 md:py-4"
 					>Shorten It!</button
 				>
 			</div>
