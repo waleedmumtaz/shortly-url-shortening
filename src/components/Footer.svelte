@@ -15,9 +15,9 @@
 			<div class="text-center md:text-left">
 				<p class="pb-5 font-bold text-white">Features</p>
 				<div class="flex flex-col items-center gap-1 md:items-start md:gap-3">
-					<a href="/#">Link Shortening</a>
-					<a href="/#">Branded Links</a>
-					<a href="/#">Analytics</a>
+					<a href="/#" class="hover:text-cstm-primary-cyan">Link Shortening</a>
+					<a href="/#" class="hover:text-cstm-primary-cyan">Branded Links</a>
+					<a href="/#" class="hover:text-cstm-primary-cyan">Analytics</a>
 				</div>
 			</div>
 
@@ -25,9 +25,9 @@
 			<div class="text-center md:text-left">
 				<p class="pb-5 font-bold text-white">Resources</p>
 				<div class="flex flex-col items-center gap-1 md:items-start md:gap-3">
-					<a href="/#">Blog</a>
-					<a href="/#">Developers</a>
-					<a href="/#">Support</a>
+					<a href="/#" class="hover:text-cstm-primary-cyan">Blog</a>
+					<a href="/#" class="hover:text-cstm-primary-cyan">Developers</a>
+					<a href="/#" class="hover:text-cstm-primary-cyan">Support</a>
 				</div>
 			</div>
 
@@ -35,9 +35,9 @@
 			<div class="text-center md:text-left">
 				<p class="pb-5 font-bold text-white">Company</p>
 				<div class="flex flex-col items-center gap-1 md:items-start md:gap-3">
-					<a href="/#">About</a>
-					<a href="/#">Our Team</a>
-					<a href="/#">Contact</a>
+					<a href="/#" class="hover:text-cstm-primary-cyan">About</a>
+					<a href="/#" class="hover:text-cstm-primary-cyan">Our Team</a>
+					<a href="/#" class="hover:text-cstm-primary-cyan">Contact</a>
 				</div>
 			</div>
 

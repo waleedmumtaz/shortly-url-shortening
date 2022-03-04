@@ -58,7 +58,9 @@
 			</div>
 			<div class="flex items-center gap-10 text-cstm-neutral-grayish-violet">
 				<a href="/#">Login</a>
-				<a href="/#" class="rounded-full bg-cstm-primary-cyan px-8 py-3 text-white">Sign Up</a>
+				<a href="/#" class="rounded-full bg-cstm-primary-cyan px-8 py-3 text-white hover:opacity-50"
+					>Sign Up</a
+				>
 			</div>
 		</div>
 	</div>
