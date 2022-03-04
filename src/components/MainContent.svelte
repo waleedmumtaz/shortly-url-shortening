@@ -4,6 +4,7 @@
 	const baseUrl = 'https://api.shrtco.de/v2/shorten?url=';
 	let url = '';
 	let copiedToClipboard = false;
+	let isUrlValid = true;
 
 	let generatedUrls = [];
 
@@ -12,6 +13,13 @@
 			try {
 				const response = await fetch(`${baseUrl}${url}`);
 				const data = await response.json();
+
+				if (!response.ok) {
+					isUrlValid = false;
+					return;
+				}
+
+				isUrlValid = true;
 				generatedUrls = [
 					...generatedUrls,
 					{
@@ -23,7 +31,8 @@
 				console.log(error);
 			}
 		} else {
-			return console.log('Please enter a valid URL');
+			isUrlValid = false;
+			return;
 		}
 	};
 
@@ -74,21 +83,31 @@
 				/>
 			</div>
 			<div
-				class="absolute inset-0 flex flex-col items-center justify-center gap-6 p-6 md:flex-row md:px-36"
+				class="absolute inset-0 flex flex-col items-center justify-center gap-8 p-6 md:flex-row md:px-36"
 			>
-				<input
-					id="input"
-					type="text"
-					bind:value={url}
-					on:focus={(event) => event.target.select()}
-					placeholder="Shorten a link here..."
-					class="w-full rounded-md bg-transparent bg-white px-3 py-3 focus:outline-none md:flex-1 md:py-4 md:px-8"
-				/>
+				<div class="relative w-full">
+					<input
+						type="text"
+						bind:value={url}
+						on:focus={(event) => event.target.select()}
+						placeholder="Shorten a link here..."
+						class={`${
+							isUrlValid ? '' : 'outline outline-2 outline-red-500 placeholder:text-red-200'
+						} w-full rounded-md bg-transparent bg-white px-3 py-2 focus:outline-none md:flex-1 md:p-4`}
+					/>
+					<div
+						class={`${
+							isUrlValid ? 'hidden' : 'block'
+						} absolute top-12 md:top-16 left-0 text-sm italic text-red-500`}
+					>
+						Please enter a valid link
+					</div>
+				</div>
 				<button
 					on:click|preventDefault={() => {
 						fetchData(url);
 					}}
-					class="w-full rounded-md bg-cstm-primary-cyan py-3 font-bold text-white md:w-44 md:py-4"
+					class="w-full rounded-md bg-cstm-primary-cyan py-2 font-bold text-white md:w-44 md:py-4"
 					>Shorten It!</button
 				>
 			</div>
