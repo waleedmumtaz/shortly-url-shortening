@@ -201,7 +201,7 @@
 				/>
 			</div>
 			<div class="hidden md:block">
-				<img src="/bg-boost-desktop.svg" alt="pattern" class="bg-cstm-primary-dark-violet" />
+				<img src="/bg-boost-desktop.svg" alt="pattern" class="w-full bg-cstm-primary-dark-violet" />
 			</div>
 			<div class="absolute inset-0 flex flex-col items-center justify-center">
 				<h2 class="mb-5 text-2xl font-bold md:text-4xl">Boost your links today</h2>
