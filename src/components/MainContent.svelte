@@ -42,9 +42,9 @@
 </script>
 
 <main>
-	<div class="mt-16 md:container md:mx-auto md:px-20">
+	<div class="mt-16">
 		<!-- hero -->
-		<div class="md:grid md:grid-cols-2">
+		<div class="md:container md:mx-auto md:grid md:grid-cols-2 md:px-20">
 			<div class="md:order-last">
 				<img src="/illustration-working.svg" alt="person working on computer" class="w-full" />
 			</div>
@@ -58,7 +58,7 @@
 		</div>
 
 		<!-- input -->
-		<div class="relative mx-6 md:mx-0 md:mt-10">
+		<div class="relative mx-6 md:container md:mx-auto md:mt-10 md:px-20">
 			<div class="md:hidden">
 				<img
 					src="/bg-shorten-mobile.svg"
@@ -74,11 +74,13 @@
 				/>
 			</div>
 			<div
-				class="absolute inset-0 flex flex-col items-center justify-center gap-6 p-6 md:flex-row md:px-14"
+				class="absolute inset-0 flex flex-col items-center justify-center gap-6 p-6 md:flex-row md:px-36"
 			>
 				<input
+					id="input"
 					type="text"
 					bind:value={url}
+					on:focus={(event) => event.target.select()}
 					placeholder="Shorten a link here..."
 					class="w-full rounded-md bg-transparent bg-white px-3 py-3 focus:outline-none md:flex-1 md:py-4 md:px-8"
 				/>
@@ -94,13 +96,16 @@
 
 		<!-- Short Codes -->
 		<div class="bg-gray-100 px-6 py-5">
-			<div class="space-y-5">
+			<div class="space-y-5 md:container md:mx-auto md:px-20">
 				{#if generatedUrls.length > 0}
-					{#each generatedUrls as generatedUrl}
-						<div transition:slide class="rounded-md bg-white shadow-md">
-							<p class="p-4">{generatedUrl.url}</p>
-							<hr />
-							<div class="space-y-2 p-4">
+					{#each generatedUrls as generatedUrl, index}
+						<div
+							transition:slide
+							class="rounded-md bg-white shadow-md md:flex md:items-center md:justify-between md:p-5 md:text-xl"
+						>
+							<p class="p-4 md:p-0">{generatedUrl.url}</p>
+							<hr class="md:hidden" />
+							<div class="space-y-2 p-4 md:flex md:items-center md:gap-5 md:space-y-0 md:p-0">
 								<a
 									rel="external"
 									href={`//${generatedUrl.shortCode}`}
@@ -110,7 +115,7 @@
 									on:click={() => {
 										copyShortCode(generatedUrl.shortCode);
 									}}
-									class={`w-full rounded-md py-2 font-bold text-white transition-all ${
+									class={`w-full rounded-md py-2 font-bold text-white transition-all md:w-28 md:text-base ${
 										copiedToClipboard ? 'bg-cstm-primary-dark-violet' : 'bg-cstm-primary-cyan'
 									}`}>{copiedToClipboard ? 'Copied!' : 'Copy'}</button
 								>
@@ -122,15 +127,18 @@
 		</div>
 
 		<!-- Advanced Statistics Section -->
-		<div class="bg-gray-100 px-6 py-20 text-center">
+		<div class="bg-gray-100 px-6 py-20 text-center md:pt-10 md:pb-40">
 			<div class="mb-20">
-				<h2 class="mb-5 text-2xl font-bold">Advanced Statistics</h2>
-				<p class="text-cstm-neutral-grayish-violet">
+				<h2 class="mb-5 text-2xl font-bold md:text-4xl">Advanced Statistics</h2>
+				<p class="text-cstm-neutral-grayish-violet md:mx-auto md:max-w-md">
 					Track how your links are performing across the web with our advanced statistics dashboard.
 				</p>
 			</div>
 
-			<div class="">
+			<div class="relative z-10 md:container md:mx-auto md:grid md:grid-cols-3 md:gap-8 md:px-20">
+				<div
+					class="absolute top-1/2 left-0 right-0 -z-10 mx-auto hidden h-2 w-1/2 bg-cstm-primary-cyan md:block"
+				/>
 				<!-- Brand Recognition -->
 				<div class="rounded-md bg-white shadow-md">
 					<div
@@ -146,10 +154,10 @@
 						</p>
 					</div>
 				</div>
-				<div class="inline-flex h-20 w-2 bg-cstm-primary-cyan" />
+				<div class="inline-flex h-20 w-2 bg-cstm-primary-cyan md:hidden" />
 
 				<!-- Detailed Records -->
-				<div class="rounded-md bg-white shadow-md">
+				<div class="rounded-md bg-white shadow-md md:translate-y-10">
 					<div
 						class="inline-flex w-fit -translate-y-10 rounded-full bg-cstm-primary-dark-violet p-5"
 					>
@@ -163,10 +171,10 @@
 						</p>
 					</div>
 				</div>
-				<div class="inline-flex h-20 w-2 bg-cstm-primary-cyan" />
+				<div class="inline-flex h-20 w-2 bg-cstm-primary-cyan md:hidden" />
 
 				<!-- Full Customizable -->
-				<div class="rounded-md bg-white shadow-md">
+				<div class="rounded-md bg-white shadow-md md:translate-y-20">
 					<div
 						class="inline-flex w-fit -translate-y-10 rounded-full bg-cstm-primary-dark-violet p-5"
 					>
@@ -185,13 +193,18 @@
 
 		<!-- Get Started -->
 		<div class="relative text-white">
-			<img
-				src="/bg-boost-mobile.svg"
-				alt="background pattern"
-				class="w-full bg-cstm-primary-dark-violet"
-			/>
+			<div class="md:hidden">
+				<img
+					src="/bg-boost-mobile.svg"
+					alt="background pattern"
+					class="w-full bg-cstm-primary-dark-violet"
+				/>
+			</div>
+			<div class="hidden md:block">
+				<img src="/bg-boost-desktop.svg" alt="pattern" class="bg-cstm-primary-dark-violet" />
+			</div>
 			<div class="absolute inset-0 flex flex-col items-center justify-center">
-				<h2 class="mb-5 text-2xl font-bold">Boost your links today</h2>
+				<h2 class="mb-5 text-2xl font-bold md:text-4xl">Boost your links today</h2>
 				<button class="rounded-full bg-cstm-primary-cyan px-8 py-3 font-bold"> Get Started </button>
 			</div>
 		</div>

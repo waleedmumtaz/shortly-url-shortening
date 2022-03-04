@@ -14,7 +14,7 @@
 	<div class="relative px-6 pt-8 md:hidden">
 		<nav>
 			<div class="flex items-center justify-between">
-				<Logo />
+				<a href="/"><Logo /></a>
 				<button on:click|preventDefault={toggleNav}>
 					<div class="flex flex-col items-center justify-center gap-1">
 						{#each Array(3) as _}
@@ -49,7 +49,7 @@
 	<div class="container mx-auto mt-10 hidden px-20 md:block">
 		<div class="flex items-center justify-between">
 			<div class="flex items-center gap-14">
-				<Logo />
+				<a href="/"><Logo /></a>
 				<div class="flex items-center gap-10 text-cstm-neutral-grayish-violet">
 					<a href="/#">Features</a>
 					<a href="/#">Pricing</a>
