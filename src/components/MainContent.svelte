@@ -3,10 +3,17 @@
 
 	const baseUrl = 'https://api.shrtco.de/v2/shorten?url=';
 	let url = '';
-	let copiedToClipboard = false;
 	let isUrlValid = true;
 
 	let generatedUrls = [];
+
+	const submit = (event) => {
+		const url = event.target.value;
+
+		if (event.key === 'Enter') {
+			fetchData(url);
+		}
+	};
 
 	const fetchData = async (url) => {
 		if (url.length > 0) {
@@ -23,8 +30,10 @@
 				generatedUrls = [
 					...generatedUrls,
 					{
+						id: Date.now(),
 						url: url,
-						shortCode: data.result.short_link
+						shortCode: data.result.short_link,
+						copied: false
 					}
 				];
 			} catch (error) {
@@ -36,13 +45,15 @@
 		}
 	};
 
-	const copyShortCode = async (shortCode) => {
+	const copyShortCode = async (shortCode, incomingId) => {
 		try {
 			await navigator.clipboard.writeText(shortCode);
-			copiedToClipboard = true;
+
+			let index = generatedUrls.findIndex((url) => url.id === incomingId);
+			generatedUrls[index].copied = true;
 
 			setTimeout(() => {
-				copiedToClipboard = false;
+				generatedUrls[index].copied = false;
 			}, 2000);
 		} catch (error) {
 			console.log(error);
@@ -53,8 +64,8 @@
 <main>
 	<div class="mt-16">
 		<!-- hero -->
-		<div class="md:container md:mx-auto md:grid md:grid-cols-2 md:px-20">
-			<div class="md:order-last">
+		<div class="md:container md:mx-auto md:mb-20 md:grid md:grid-cols-2 md:px-20">
+			<div class="px-6 md:order-last">
 				<img src="/illustration-working.svg" alt="person working on computer" class="w-full" />
 			</div>
 			<div class="mt-10 mb-20 px-6 text-center md:px-0 md:text-left">
@@ -62,7 +73,9 @@
 				<p class="mb-5 text-cstm-neutral-grayish-violet md:mb-10 md:max-w-md">
 					Build your brand’s recognition and get detailed insights on how your links are performing.
 				</p>
-				<button class="rounded-full bg-cstm-primary-cyan py-3 px-8 text-white">Get Started</button>
+				<button class="rounded-full bg-cstm-primary-cyan py-3 px-8 text-white hover:opacity-50"
+					>Get Started</button
+				>
 			</div>
 		</div>
 
@@ -89,6 +102,7 @@
 					<input
 						type="text"
 						bind:value={url}
+						on:keydown={submit}
 						on:focus={(event) => event.target.select()}
 						placeholder="Shorten a link here..."
 						class={`${
@@ -107,7 +121,7 @@
 					on:click|preventDefault={() => {
 						fetchData(url);
 					}}
-					class="w-full rounded-md bg-cstm-primary-cyan py-2 font-bold text-white md:w-44 md:py-4"
+					class="w-full rounded-md bg-cstm-primary-cyan py-2 font-bold text-white hover:opacity-50 md:w-44 md:py-4"
 					>Shorten It!</button
 				>
 			</div>
@@ -132,11 +146,13 @@
 								>
 								<button
 									on:click={() => {
-										copyShortCode(generatedUrl.shortCode);
+										copyShortCode(generatedUrl.shortCode, generatedUrl.id);
 									}}
 									class={`w-full rounded-md py-2 font-bold text-white transition-all md:w-28 md:text-base ${
-										copiedToClipboard ? 'bg-cstm-primary-dark-violet' : 'bg-cstm-primary-cyan'
-									}`}>{copiedToClipboard ? 'Copied!' : 'Copy'}</button
+										generatedUrl.copied
+											? 'bg-cstm-primary-dark-violet'
+											: 'bg-cstm-primary-cyan hover:opacity-50'
+									}`}>{generatedUrl.copied ? 'Copied!' : 'Copy'}</button
 								>
 							</div>
 						</div>
@@ -224,7 +240,9 @@
 			</div>
 			<div class="absolute inset-0 flex flex-col items-center justify-center">
 				<h2 class="mb-5 text-2xl font-bold md:text-4xl">Boost your links today</h2>
-				<button class="rounded-full bg-cstm-primary-cyan px-8 py-3 font-bold"> Get Started </button>
+				<button class="rounded-full bg-cstm-primary-cyan px-8 py-3 font-bold hover:opacity-50">
+					Get Started
+				</button>
 			</div>
 		</div>
 	</div>
